@@ -27,7 +27,7 @@ func address(address [4]byte) string {
 func main() {
 	var m = flag.Int("m", traceroute.DEFAULT_MAX_HOPS, `Set the max time-to-live (max number of hops) used in outgoing probe packets (default is 64)`)
 	var f = flag.Int("f", traceroute.DEFAULT_FIRST_HOP, `Set the first used time-to-live, e.g. the first hop (default is 1)`)
-	var q = flag.Int("q", 1, `Set the number of probes per "ttl" to nqueries (default is one probe).`)
+	var q = flag.Int("q", traceroute.DEFAULT_PROBES, `Set the number of probes per "ttl" to nqueries (default is one probe).`)
 
 	flag.Parse()
 	host := flag.Arg(0)
@@ -57,6 +57,6 @@ func main() {
 
 	_, err = traceroute.Traceroute(host, &options, c)
 	if err != nil {
-		fmt.Printf("Error: ", err)
+		fmt.Printf("Error: %v ", err)
 	}
 }
